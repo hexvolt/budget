@@ -3,4 +3,7 @@ from django.db import models
 
 class Bank(models.Model):
 
-    name = models.CharField()
+    name = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'bank'
