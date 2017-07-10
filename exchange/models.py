@@ -15,11 +15,11 @@ class ExchangeRate(models.Model):
 
     bank = models.ForeignKey('bank.Bank', related_name='exchange_rates', on_delete=models.CASCADE)
 
-    rate = models.DecimalField()
+    rate = models.DecimalField(max_digits=18, decimal_places=9)
     date = models.DateTimeField()
 
-    currency_from = models.ForeignKey('exchange.Currency', related_name='exchange_rates', on_delete=models.CASCADE)
-    currency_to = models.ForeignKey('exchange.Currency', related_name='exchange_rates', on_delete=models.CASCADE)
+    currency_from = models.ForeignKey('exchange.Currency', related_name='exchange_rates_from', on_delete=models.CASCADE)
+    currency_to = models.ForeignKey('exchange.Currency', related_name='exchange_rates_to', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'exchange_rate'
@@ -28,11 +28,11 @@ class ExchangeRate(models.Model):
 
 class Conversion(models.Model):
 
-    account_from = models.ForeignKey('account.Account', related_name='conversions_from', on_delete=models.CASCADE)
-    amount_from = models.DecimalField()
+    amount_from = models.DecimalField(max_digits=12, decimal_places=2)
+    currency_from = models.ForeignKey('exchange.Currency', related_name='conversions_from', on_delete=models.CASCADE)
 
-    account_to = models.ForeignKey('account.Account', related_name='conversions_to', on_delete=models.CASCADE)
-    amount_to = models.DecimalField()
+    amount_to = models.DecimalField(max_digits=12, decimal_places=2)
+    currency_to = models.ForeignKey('exchange.Currency', related_name='conversions_to', on_delete=models.CASCADE)
 
     date = models.DateTimeField()
     description = models.TextField()
