@@ -13,16 +13,16 @@ class Source(models.Model):
 
 class Income(models.Model):
 
-    source = models.ForeignKey('income.Source', related_name='incomes', on_delete=models.CASCADE)
+    source = models.ForeignKey('income.Source', related_name='incomes', on_delete=models.PROTECT)
 
     amount = models.DecimalField()
-    currency = models.ForeignKey('exchange.Currency')
+    currency = models.ForeignKey('exchange.Currency',related_name='incomes', on_delete=models.PROTECT)
 
     date = models.DateTimeField()
-    description = models.CharField()
+    description = models.TextField()
 
-    # to_account = models.ForeignKey('account.Account') ??? account instead of currenyc?
-    # hash_tags
+    # to_account = models.ForeignKey('account.Account', null=True)
+    # hash_tags = models.ManyToManyField()
 
     class Meta:
         db_table = 'income'

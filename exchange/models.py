@@ -8,7 +8,7 @@ class Currency(models.Model):
 
     class Meta:
         db_table = 'currency'
-        ordering = ['name']
+        ordering = ['iso_code']
 
 
 class ExchangeRate(models.Model):

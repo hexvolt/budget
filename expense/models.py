@@ -13,16 +13,16 @@ class Category(models.Model):
 
 class Expense(models.Model):
 
-    category = models.ForeignKey('expense.Category', related_name='expenses', on_delete=models.CASCADE)
+    category = models.ForeignKey('expense.Category', related_name='expenses', on_delete=models.PROTECT)
 
     amount = models.DecimalField()
-    currency = models.ForeignKey('exchange.Currency', related_name='expenses', on_delete=models.CASCADE)
+    currency = models.ForeignKey('exchange.Currency', related_name='expenses', on_delete=models.PROTECT)
 
     date = models.DateTimeField()
-    description = models.CharField()
+    description = models.TextField()
 
-    # from_account = models.ForeignKey('account.Account') instead of currency???
-    # hash_tags
+    # from_account = models.ForeignKey('account.Account', null=True)
+    # hash_tags = models.ManyToManyField()
 
     class Meta:
         db_table = 'expense'
