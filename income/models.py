@@ -13,10 +13,14 @@ class Source(models.Model):
 
 class Income(models.Model):
 
-    source = models.ForeignKey('income.Source', related_name='incomes', on_delete=models.PROTECT)
+    source = models.ForeignKey('income.Source',
+                               related_name='incomes',
+                               on_delete=models.PROTECT)
 
     amount = models.DecimalField(max_digits=12, decimal_places=2)
-    currency = models.ForeignKey('exchange.Currency',related_name='incomes', on_delete=models.PROTECT)
+    currency = models.ForeignKey('exchange.Currency',
+                                 related_name='incomes',
+                                 on_delete=models.PROTECT)
 
     date = models.DateTimeField()
     description = models.TextField()

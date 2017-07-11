@@ -13,10 +13,14 @@ class Category(models.Model):
 
 class Expense(models.Model):
 
-    category = models.ForeignKey('expense.Category', related_name='expenses', on_delete=models.PROTECT)
+    category = models.ForeignKey('expense.Category',
+                                 related_name='expenses',
+                                 on_delete=models.PROTECT)
 
     amount = models.DecimalField(max_digits=12, decimal_places=2)
-    currency = models.ForeignKey('exchange.Currency', related_name='expenses', on_delete=models.PROTECT)
+    currency = models.ForeignKey('exchange.Currency',
+                                 related_name='expenses',
+                                 on_delete=models.PROTECT)
 
     date = models.DateTimeField()
     description = models.TextField()

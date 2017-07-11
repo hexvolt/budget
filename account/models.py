@@ -3,10 +3,14 @@ from django.db import models
 
 class Account(models.Model):
 
-    bank = models.ForeignKey('bank.Bank', related_name='accounts', on_delete=models.PROTECT)
+    bank = models.ForeignKey('bank.Bank',
+                             related_name='accounts',
+                             on_delete=models.PROTECT)
 
     balance = models.DecimalField(max_digits=12, decimal_places=2)
-    currency = models.ForeignKey('exchange.Currency', related_name='accounts', on_delete=models.PROTECT)
+    currency = models.ForeignKey('exchange.Currency',
+                                 related_name='accounts',
+                                 on_delete=models.PROTECT)
 
     name = models.CharField(max_length=255)
     description = models.TextField()
