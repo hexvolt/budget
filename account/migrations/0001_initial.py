@@ -19,12 +19,28 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Account',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('balance', models.DecimalField(decimal_places=2, max_digits=12)),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID'
+                )),
+                ('balance', models.DecimalField(
+                    decimal_places=2,
+                    max_digits=12
+                )),
                 ('name', models.CharField(max_length=255)),
                 ('description', models.TextField()),
-                ('bank', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='accounts', to='bank.Bank')),
-                ('currency', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='accounts', to='exchange.Currency')),
+                ('bank', models.ForeignKey(
+                    on_delete=django.db.models.deletion.PROTECT,
+                    related_name='accounts',
+                    to='bank.Bank'
+                )),
+                ('currency', models.ForeignKey(
+                    on_delete=django.db.models.deletion.PROTECT,
+                    related_name='accounts',
+                    to='exchange.Currency'
+                )),
             ],
             options={
                 'db_table': 'account',

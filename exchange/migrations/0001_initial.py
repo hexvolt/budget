@@ -18,9 +18,20 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Conversion',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount_from', models.DecimalField(decimal_places=2, max_digits=12)),
-                ('amount_to', models.DecimalField(decimal_places=2, max_digits=12)),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID'
+                )),
+                ('amount_from', models.DecimalField(
+                    decimal_places=2,
+                    max_digits=12
+                )),
+                ('amount_to', models.DecimalField(
+                    decimal_places=2,
+                    max_digits=12
+                )),
                 ('date', models.DateTimeField()),
                 ('description', models.TextField()),
             ],
@@ -32,7 +43,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Currency',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID'
+                )),
                 ('name', models.CharField(max_length=255)),
                 ('iso_code', models.CharField(max_length=3)),
             ],
@@ -44,12 +60,29 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ExchangeRate',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID'
+                )),
                 ('rate', models.DecimalField(decimal_places=9, max_digits=18)),
                 ('date', models.DateTimeField()),
-                ('bank', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='exchange_rates', to='bank.Bank')),
-                ('currency_from', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='exchange_rates_from', to='exchange.Currency')),
-                ('currency_to', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='exchange_rates_to', to='exchange.Currency')),
+                ('bank', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='exchange_rates',
+                    to='bank.Bank'
+                )),
+                ('currency_from', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='exchange_rates_from',
+                    to='exchange.Currency'
+                )),
+                ('currency_to', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='exchange_rates_to',
+                    to='exchange.Currency'
+                )),
             ],
             options={
                 'db_table': 'exchange_rate',
@@ -59,11 +92,19 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='conversion',
             name='currency_from',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='conversions_from', to='exchange.Currency'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name='conversions_from',
+                to='exchange.Currency'
+            ),
         ),
         migrations.AddField(
             model_name='conversion',
             name='currency_to',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='conversions_to', to='exchange.Currency'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name='conversions_to',
+                to='exchange.Currency'
+            ),
         ),
     ]

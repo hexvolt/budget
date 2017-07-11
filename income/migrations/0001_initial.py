@@ -18,11 +18,23 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Income',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.DecimalField(decimal_places=2, max_digits=12)),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID'
+                )),
+                ('amount', models.DecimalField(
+                    decimal_places=2,
+                    max_digits=12
+                )),
                 ('date', models.DateTimeField()),
                 ('description', models.TextField()),
-                ('currency', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='incomes', to='exchange.Currency')),
+                ('currency', models.ForeignKey(
+                    on_delete=django.db.models.deletion.PROTECT,
+                    related_name='incomes',
+                    to='exchange.Currency'
+                )),
             ],
             options={
                 'db_table': 'income',
@@ -32,7 +44,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Source',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID'
+                )),
                 ('name', models.CharField(max_length=255)),
                 ('order', models.PositiveSmallIntegerField(default=0)),
             ],
@@ -44,6 +61,10 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='income',
             name='source',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='incomes', to='income.Source'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name='incomes',
+                to='income.Source'
+            ),
         ),
     ]
