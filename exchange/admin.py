@@ -17,6 +17,11 @@ class ConversionAdmin(admin.ModelAdmin):
         return f'{obj.amount_to} {obj.currency_to}'
 
 
+class CurrencyAdmin(admin.ModelAdmin):
+    fields = (('name', 'iso_code'),)
+    list_display = ('name', 'iso_code')
+
+
 class ExchangeRateAdmin(admin.ModelAdmin):
     fields = ('bank', 'date', ('currency_from', 'rate', 'currency_to'))
     list_display = ('bank', 'date', 'direction', 'rate')
@@ -24,6 +29,6 @@ class ExchangeRateAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Conversion, ConversionAdmin)
-admin.site.register(Currency)
+admin.site.register(Currency, CurrencyAdmin)
 admin.site.register(ExchangeRate, ExchangeRateAdmin)
 
