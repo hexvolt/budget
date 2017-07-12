@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 from django.db import models
 
@@ -23,7 +23,7 @@ class ExchangeRate(models.Model):
                              on_delete=models.CASCADE)
 
     rate = models.DecimalField(max_digits=18, decimal_places=9)
-    date = models.DateTimeField(default=datetime.datetime.now)
+    date = models.DateTimeField(default=datetime.now)
 
     currency_from = models.ForeignKey('exchange.Currency',
                                       related_name='exchange_rates_from',
@@ -54,9 +54,13 @@ class Conversion(models.Model):
                                     related_name='conversions_to',
                                     on_delete=models.CASCADE)
 
-    date = models.DateTimeField()
-    description = models.TextField()
+    date = models.DateTimeField(default=datetime.now)
+    description = models.TextField(blank=True)
 
     class Meta:
         db_table = 'conversion'
         ordering = ['date']
+
+    @property
+    def direction(self):
+        return f'{self.currency_from} to {self.currency_to}'
