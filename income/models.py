@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 
 
@@ -9,6 +11,9 @@ class Source(models.Model):
     class Meta:
         db_table = 'income_source'
         ordering = ['order', 'name']
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Income(models.Model):
@@ -22,8 +27,8 @@ class Income(models.Model):
                                  related_name='incomes',
                                  on_delete=models.PROTECT)
 
-    date = models.DateTimeField()
-    description = models.TextField()
+    date = models.DateTimeField(default=datetime.now)
+    description = models.TextField(blank=True)
 
     # to_account = models.ForeignKey('account.Account', null=True)
     # hash_tags = models.ManyToManyField()
@@ -31,3 +36,6 @@ class Income(models.Model):
     class Meta:
         db_table = 'income'
         ordering = ['date']
+
+    def __str__(self):
+        return f'{self.source}: {self.amount} {self.currency}'
