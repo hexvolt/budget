@@ -13,9 +13,13 @@ class Account(models.Model):
                                  on_delete=models.PROTECT)
 
     name = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(blank=True)
 
     # account_type (deposit, card, saving, etc)
 
     class Meta:
         db_table = 'account'
+        unique_together = ('bank', 'name', 'currency')
+
+    def __str__(self):
+        return f'{self.name} at {self.bank} ({self.currency})'
