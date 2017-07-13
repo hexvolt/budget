@@ -25,14 +25,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django.contrib.sites',
+    'django.contrib.sites',
 
-    # 'rest_framework',
-    # 'rest_framework.authtoken',
-    # 'allauth',
-    # 'allauth.account',
-    # 'rest_auth',
-    # 'rest_auth.registration',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
 
     'bank',
     'bank_account',
@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'income',
 ]
 
-# SITE_ID = 1
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
