@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.conf import settings
 from django.db import models
 
 
@@ -43,6 +44,10 @@ class ExchangeRate(models.Model):
 
 
 class Conversion(models.Model):
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             related_name='conversions',
+                             on_delete=models.CASCADE)
 
     amount_from = models.DecimalField(max_digits=12, decimal_places=2)
     currency_from = models.ForeignKey('exchange.Currency',
