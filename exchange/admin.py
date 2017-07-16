@@ -4,16 +4,20 @@ from exchange.models import Currency, Conversion, ExchangeRate
 
 class ConversionAdmin(admin.ModelAdmin):
     fields = (
+        'user',
         ('amount_from', 'currency_from'),
         ('amount_to', 'currency_to'),
         'date'
     )
-    list_display = ('date', 'sold', 'bought')
+    list_display = ('user', 'date', 'sold', 'bought')
+    list_filter = ('user',)
 
-    def sold(self, obj):
+    @staticmethod
+    def sold(obj):
         return f'{obj.amount_from} {obj.currency_from}'
 
-    def bought(self, obj):
+    @staticmethod
+    def bought(obj):
         return f'{obj.amount_to} {obj.currency_to}'
 
 

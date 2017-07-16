@@ -1,18 +1,29 @@
 from django.contrib import admin
 
-from income.models import Source, Income
+from income.models import IncomeSource, Income
 
 
 class IncomeAdmin(admin.ModelAdmin):
-    fields = ('source', ('amount', 'currency'), 'date', 'description')
-    list_display = ('source', 'date', 'amount', 'currency', 'description')
-    list_filter = ('source', 'currency')
+    fields = (
+        'income_source',
+        ('amount', 'currency'),
+        'date',
+        'description'
+    )
+    list_display = (
+        'income_source',
+        'date',
+        'amount',
+        'currency',
+        'description'
+    )
+    list_filter = ('income_source', 'currency')
 
 
-class SourceAdmin(admin.ModelAdmin):
-    fields = (('name', 'order'),)
+class IncomeSourceAdmin(admin.ModelAdmin):
+    fields = ('user', ('name', 'order'),)
     list_display = ('name', 'order')
 
 
 admin.site.register(Income, IncomeAdmin)
-admin.site.register(Source, SourceAdmin)
+admin.site.register(IncomeSource, IncomeSourceAdmin)

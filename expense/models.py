@@ -1,26 +1,32 @@
 from datetime import datetime
 
+from django.conf import settings
 from django.db import models
 
 
-class Category(models.Model):
+class ExpenseCategory(models.Model):
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             related_name='expense_categories',
+                             on_delete=models.CASCADE)
 
     name = models.CharField(max_length=255)
     order = models.PositiveSmallIntegerField(default=0)
 
     class Meta:
         db_table = 'expense_category'
-        ordering = ['order', 'name']
+        unique_together = ('user', 'name')
+        ordering = ['user', 'order', 'name']
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name} ({self.user})'
 
 
 class Expense(models.Model):
 
-    category = models.ForeignKey('expense.Category',
-                                 related_name='expenses',
-                                 on_delete=models.PROTECT)
+    expense_category = models.ForeignKey('expense.ExpenseCategory',
+                                         related_name='expenses',
+                                         on_delete=models.PROTECT)
 
     amount = models.DecimalField(max_digits=12, decimal_places=2)
     currency = models.ForeignKey('exchange.Currency',
@@ -38,4 +44,4 @@ class Expense(models.Model):
         ordering = ['date']
 
     def __str__(self):
-        return f'{self.category}: {self.amount} {self.currency}'
+        return f'{self.expense_category}: {self.amount} {self.currency}'

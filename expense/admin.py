@@ -1,18 +1,30 @@
 from django.contrib import admin
 
-from expense.models import Category, Expense
+from expense.models import ExpenseCategory, Expense
 
 
-class CategoryAdmin(admin.ModelAdmin):
-    fields = (('name', 'order'),)
-    list_display = ('name', 'order')
+class ExpenseCategoryAdmin(admin.ModelAdmin):
+    fields = ('user', ('name', 'order'),)
+    list_display = ('user', 'name', 'order')
+    list_filter = ('user',)
 
 
 class ExpenseAdmin(admin.ModelAdmin):
-    fields = ('category', ('amount', 'currency'), 'date', 'description')
-    list_display = ('category', 'date', 'amount', 'currency', 'description')
-    list_filter = ('category', 'currency')
+    fields = (
+        'expense_category',
+        ('amount', 'currency'),
+        'date',
+        'description'
+    )
+    list_display = (
+        'expense_category',
+        'date',
+        'amount',
+        'currency',
+        'description'
+    )
+    list_filter = ('expense_category', 'currency')
 
 
-admin.site.register(Category, CategoryAdmin)
+admin.site.register(ExpenseCategory, ExpenseCategoryAdmin)
 admin.site.register(Expense, ExpenseAdmin)
