@@ -25,6 +25,11 @@ class Migration(migrations.Migration):
             ),
             preserve_default=False,
         ),
+        migrations.AlterField(
+            model_name='bank',
+            name='name',
+            field=models.CharField(max_length=255),
+        ),
         migrations.AlterUniqueTogether(
             name='bank',
             unique_together=set([('user', 'name')]),
