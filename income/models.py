@@ -16,10 +16,10 @@ class IncomeSource(models.Model):
     class Meta:
         db_table = 'income_source'
         unique_together = ('user', 'name')
-        ordering = ['order', 'name']
+        ordering = ['user', 'order', 'name']
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name} ({self.user})'
 
 
 class Income(models.Model):

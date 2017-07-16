@@ -4,8 +4,9 @@ from expense.models import ExpenseCategory, Expense
 
 
 class ExpenseCategoryAdmin(admin.ModelAdmin):
-    fields = (('name', 'order'),)
-    list_display = ('name', 'order')
+    fields = ('user', ('name', 'order'),)
+    list_display = ('user', 'name', 'order')
+    list_filter = ('user',)
 
 
 class ExpenseAdmin(admin.ModelAdmin):

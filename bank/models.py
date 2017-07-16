@@ -13,6 +13,7 @@ class Bank(models.Model):
     class Meta:
         db_table = 'bank'
         unique_together = ('user', 'name')
+        ordering = ['user', 'name']
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name} ({self.user})'

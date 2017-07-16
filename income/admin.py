@@ -21,7 +21,7 @@ class IncomeAdmin(admin.ModelAdmin):
 
 
 class IncomeSourceAdmin(admin.ModelAdmin):
-    fields = (('name', 'order'),)
+    fields = ('user', ('name', 'order'),)
     list_display = ('name', 'order')
 
 

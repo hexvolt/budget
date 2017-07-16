@@ -16,10 +16,10 @@ class ExpenseCategory(models.Model):
     class Meta:
         db_table = 'expense_category'
         unique_together = ('user', 'name')
-        ordering = ['order', 'name']
+        ordering = ['user', 'order', 'name']
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name} ({self.user})'
 
 
 class Expense(models.Model):
