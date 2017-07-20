@@ -1,9 +1,13 @@
+from rest_framework.serializers import HyperlinkedModelSerializer
+
 from bank.models import Bank
-from rest_framework import serializers
+from bank_account.serializers import BankAccountSerializer
 
 
-class BankSerializer(serializers.HyperlinkedModelSerializer):
+class BankSerializer(HyperlinkedModelSerializer):
+
+    accounts = BankAccountSerializer(many=True, read_only=True)
 
     class Meta:
         model = Bank
-        fields = ('url', 'name', )
+        fields = ('id', 'url', 'name', 'accounts')
