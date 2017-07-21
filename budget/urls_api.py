@@ -5,22 +5,26 @@ import bank.views
 import bank_account.views
 
 
+# '^/banks/$'
+# '^/banks/{pk}/$'
 router = routers.DefaultRouter()
 router.register(
-    prefix=r'banks',
+    prefix=r'banks',          # URLs for this resource will be '.../banks/...'
     viewset=bank.views.BankViewSet,
-    base_name='bank'
+    base_name='bank'          # set view/URL names as 'bank-list', etc
 )
 
+# '^/banks/{bank_pk}/accounts/$'
+# '^/banks/{bank_pk}/accounts/{pk}/$'
 banks_account_router = routers.NestedSimpleRouter(
-    parent_router=router,
-    parent_prefix=r'banks',
-    lookup='bank'
+    parent_router=router,     # a parent router to attach to
+    parent_prefix=r'banks',   # an end-point of parent router to attach to
+    lookup='bank'             # let a variable for parent resource be 'bank_pk'
 )
 banks_account_router.register(
-    prefix=r'accounts',
+    prefix=r'accounts',       # a nested part of URL will be '.../accounts/...'
     viewset=bank_account.views.BankAccountViewSet,
-    base_name='account'
+    base_name='bankaccount'  # set view/URL names as 'bankaccount-list', etc
 )
 
 
