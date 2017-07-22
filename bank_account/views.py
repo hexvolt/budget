@@ -1,7 +1,6 @@
 from rest_framework import viewsets
-from rest_framework.filters import SearchFilter
+from rest_framework.filters import SearchFilter, DjangoFilterBackend
 from rest_framework.generics import get_object_or_404
-from rest_framework.response import Response
 
 from bank_account.models import BankAccount
 from bank_account.serializers import BankAccountSerializer
@@ -10,37 +9,41 @@ from bank_account.serializers import BankAccountSerializer
 class BankAccountViewSet(viewsets.ModelViewSet):
 
     serializer_class = BankAccountSerializer
-    filter_backends = (SearchFilter,)
+    filter_backends = (DjangoFilterBackend, SearchFilter,)
+    filter_fields = ('currency',)
     search_fields = ('name',)
 
     def get_queryset(self):
-        return BankAccount.objects.filter(bank__user=self.request.user)
+        """
+        Return only those bank accounts which belong to current user
+        and which are related to the bank ID specified in the URL
+        """
 
-    def list(self, request, bank_pk=None, *args, **kwargs):
-
-        bank_accounts = self.get_queryset().filter(bank=bank_pk)
-        serializer = self.get_serializer(
-            bank_accounts,
-            many=True,
-            context={'request': request}
+        bank_pk = self.kwargs['bank_pk']
+        queryset = BankAccount.objects.filter(
+            bank__user=self.request.user,
+            bank=bank_pk
         )
-        return Response(serializer.data)
+        return queryset
 
-    def retrieve(self, request, bank_pk=None, pk=None, *args, **kwargs):
+    def get_object(self):
+        """
+        Returns a bank account which belongs to a certain bank
+        and which ID is specified in the URL. Used by retrieve view.
+        """
 
-        # getting a certain bank_account using IDs from URL
-        bank_accounts = self.get_queryset().filter(bank=bank_pk)
-        bank_account = get_object_or_404(queryset=bank_accounts, pk=pk)
-
-        serializer = self.get_serializer(
-            bank_account,
-            context={'request': request}
+        bank_account = get_object_or_404(
+            queryset=self.get_queryset(),
+            pk=self.kwargs['pk']
         )
-        return Response(serializer.data)
+        return bank_account
 
     def perform_create(self, serializer):
+        """
+        Determines the bank instance from URL in order to create
+        related bank account. Used by create view.
+        """
 
-        # getting the bank using its ID taken from URL
         bank_pk = self.kwargs['bank_pk']
         user_banks = self.request.user.banks.all()
         bank = get_object_or_404(queryset=user_banks, pk=bank_pk)
