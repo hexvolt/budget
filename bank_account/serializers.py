@@ -12,7 +12,14 @@ class BankAccountSerializer(NestedHyperlinkedModelSerializer):
 
     class Meta:
         model = BankAccount
-        fields = ('id', 'url', 'name', 'description', 'balance', 'currency')
+        fields = (
+            'id',
+            'url',
+            'name',
+            'description',
+            'balance',
+            'currency'
+        )
 
     parent_lookup_kwargs = {
         'bank_pk': 'bank__pk',

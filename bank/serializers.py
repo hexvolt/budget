@@ -10,4 +10,9 @@ class BankSerializer(HyperlinkedModelSerializer):
 
     class Meta:
         model = Bank
-        fields = ('id', 'url', 'name', 'accounts')
+        fields = (
+            'id',
+            'url',
+            'name',
+            'accounts'
+        )

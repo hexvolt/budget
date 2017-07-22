@@ -17,17 +17,20 @@ class BankAccountViewSet(viewsets.ModelViewSet):
         return BankAccount.objects.filter(bank__user=self.request.user)
 
     def list(self, request, bank_pk=None, *args, **kwargs):
-        queryset = self.get_queryset().filter(bank=bank_pk)
-        serializer = self.serializer_class(
-            queryset,
+
+        bank_accounts = self.get_queryset().filter(bank=bank_pk)
+        serializer = self.get_serializer(
+            bank_accounts,
             many=True,
             context={'request': request}
         )
         return Response(serializer.data)
 
-    def retrieve(self, request, pk=None, bank_pk=None, *args, **kwargs):
-        queryset = self.get_queryset().filter(bank=bank_pk)
-        bank_account = get_object_or_404(queryset, pk=pk)
+    def retrieve(self, request, bank_pk=None, pk=None, *args, **kwargs):
+
+        # getting a certain bank_account using IDs from URL
+        bank_accounts = self.get_queryset().filter(bank=bank_pk)
+        bank_account = get_object_or_404(queryset=bank_accounts, pk=pk)
 
         serializer = self.get_serializer(
             bank_account,
@@ -36,14 +39,10 @@ class BankAccountViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def perform_create(self, serializer):
-        serializer.save()
 
-    def create(self, request, bank_pk=None, *args, **kwargs):
-        queryset = Bank.objects.filter(user=request.user)
-        bank = get_object_or_404(queryset, pk=bank_pk)
-        serializer = self.get_serializer(data=request.data, bank=bank)
+        # getting the bank using its ID taken from URL
+        bank_pk = self.kwargs['bank_pk']
+        user_banks = self.request.user.banks.all()
+        bank = get_object_or_404(queryset=user_banks, pk=bank_pk)
 
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        serializer.save(bank=bank)
