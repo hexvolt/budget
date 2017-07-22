@@ -5,7 +5,7 @@ from django.db import models
 class Bank(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             related_name='bank_accounts',
+                             related_name='banks',
                              on_delete=models.CASCADE)
 
     name = models.CharField(max_length=255)
