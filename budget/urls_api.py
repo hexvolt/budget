@@ -3,7 +3,7 @@ from rest_framework_nested import routers
 
 import bank.views
 import bank_account.views
-
+import exchange.views
 
 # '^/banks/$'
 # '^/banks/{pk}/$'
@@ -24,7 +24,15 @@ banks_account_router = routers.NestedSimpleRouter(
 banks_account_router.register(
     prefix=r'accounts',       # a nested part of URL will be '.../accounts/...'
     viewset=bank_account.views.BankAccountViewSet,
-    base_name='bankaccount'  # set view/URL names as 'bankaccount-list', etc
+    base_name='bankaccount'   # set view/URL names as 'bankaccount-list', etc
+)
+
+# '^/currencies/$'
+# '^/currencies/{pk}/$'
+router.register(
+    prefix=r'currencies',
+    viewset=exchange.views.CurrencyViewSet,
+    base_name='currency'      # set view/URL names as 'currency-list', etc
 )
 
 
