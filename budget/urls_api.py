@@ -35,6 +35,14 @@ router.register(
     base_name='currency'      # set view/URL names as 'currency-list', etc
 )
 
+# '^/exchange_rates/$'
+# '^/exchange_rates/{pk}/$'
+router.register(
+    prefix=r'exchange_rates',
+    viewset=exchange.views.ExchangeRateViewSet,
+    base_name='exchangerate'  # set view/URL names as 'exchangerate-list', etc
+)
+
 
 urlpatterns = [
     url(r'^', include(router.urls)),
