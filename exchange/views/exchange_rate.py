@@ -25,11 +25,8 @@ class ExchangeRateFilter(filters.FilterSet):
 
     def filter_latest_per_bank(self, queryset, name, value):
         """
-
-        :param queryset:
-        :param name:
-        :param value:
-        :return:
+        Returns the latest ExchangeRates for each bank
+        present in the queryset.
         """
 
         if connection.vendor == 'postgresql':
