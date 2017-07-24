@@ -1,9 +1,9 @@
-from django.db.models import Max, Q
+from django.db import connection
+from django.db.models import Max, F
 from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import rest_framework as filters
 
 from rest_framework import viewsets
-from rest_framework.filters import SearchFilter
 
 from exchange.models import ExchangeRate
 from exchange.serializers import ExchangeRateSerializer
@@ -32,22 +32,22 @@ class ExchangeRateFilter(filters.FilterSet):
         :return:
         """
 
-        bank_latest_dates = queryset.values('bank').\
-            annotate(latest_date=Max('date')).order_by().values('id')
+        if connection.vendor == 'postgresql':
+            # Postgres supports DISTINCT ON construction, so this is the
+            # most efficient way to obtain the latest rates per bank
 
-        q_statement = Q()
+            queryset = queryset.order_by('bank', '-date').distinct('bank')
 
-        for bank_latest_date in bank_latest_dates:
-            q_statement |= (Q(bank__exact=bank_latest_date['bank'],
-                              date=bank_latest_date['latest_date']))
+        else:
+            # As other databases do not support DISTINCT operation on a
+            # certain field, we compute the latest date manually. This
+            # query is fairly inefficient in terms of performance, but
+            # this is the most elegant Django ORM construction which allows
+            # to avoid for-loops or raw SQL queries.
 
-        queryset = queryset.filter(q_statement)
-        # SELECT "exchange_rate"."id", MAX("exchange_rate"."date") AS "latest_date"
-        # FROM "exchange_rate" INNER JOIN "bank" ON ("exchange_rate"."bank_id" = "bank"."id")
-        # WHERE "bank"."user_id" = 1 GROUP BY "exchange_rate"."bank_id"
-
-        # with Postgres database this can be used instead:
-        # queryset = queryset.order_by('bank', '-date').distinct('bank')
+            queryset = queryset.annotate(
+                latest_date=Max('bank__exchange_rates__date')
+            ).filter(date=F('latest_date'))
 
         return queryset
 
@@ -57,12 +57,6 @@ class ExchangeRateViewSet(viewsets.ModelViewSet):
     serializer_class = ExchangeRateSerializer
     filter_backends = (DjangoFilterBackend,)
     filter_class = ExchangeRateFilter
-    # filter_fields = {
-    #     'bank': ['exact'],
-    #     'date': ['gte', 'lt'],
-    #     'currency_from': ['exact'],
-    #     'currency_to': ['exact']
-    # }
 
     def get_queryset(self):
         return ExchangeRate.objects.filter(bank__user=self.request.user)
