@@ -43,6 +43,13 @@ router.register(
     base_name='exchangerate'  # set view/URL names as 'exchangerate-list', etc
 )
 
+# '^/conversions/$'
+# '^/conversions/{pk}/$'
+router.register(
+    prefix=r'conversions',
+    viewset=exchange.views.ConversionViewSet,
+    base_name='conversion'    # set view/URL names as 'conversion-list', etc
+)
 
 urlpatterns = [
     url(r'^', include(router.urls)),

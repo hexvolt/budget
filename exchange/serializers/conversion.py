@@ -20,11 +20,11 @@ class ConversionSerializer(HyperlinkedModelSerializer):
         fields = (
             'id',
             'url',
+            'date',
             'amount_from',
             'currency_from',
             'amount_to',
             'currency_to',
-            'date',
             'description',
         )
 

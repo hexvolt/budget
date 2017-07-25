@@ -27,8 +27,8 @@ class ExchangeRateSerializer(HyperlinkedModelSerializer):
             'id',
             'url',
             'bank',
-            'rate',
             'date',
+            'rate',
             'currency_from',
             'currency_to',
         )
