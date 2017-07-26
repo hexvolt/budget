@@ -54,12 +54,20 @@ router.register(
     base_name='conversion'    # set view/URL names as 'conversion-list', etc
 )
 
-# '^/expense_category/$'
-# '^/expense_category/{pk}/$'
+# '^/expense_categories/$'
+# '^/expense_categories/{pk}/$'
 router.register(
     prefix=r'expense_categories',
     viewset=expense.views.ExpenseCategoryViewSet,
     base_name='expensecategory'
+)
+
+# '^/expenses/$'
+# '^/expenses/{pk}/$'
+router.register(
+    prefix=r'expenses',
+    viewset=expense.views.ExpenseViewSet,
+    base_name='expense'
 )
 
 urlpatterns = [

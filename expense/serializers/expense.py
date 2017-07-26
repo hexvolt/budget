@@ -23,9 +23,9 @@ class ExpenseSerializer(HyperlinkedModelSerializer):
             'id',
             'url',
             'expense_category',
+            'date',
             'amount',
             'currency',
-            'date',
             'description',
         )
 
