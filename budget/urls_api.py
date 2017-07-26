@@ -70,6 +70,22 @@ router.register(
     base_name='expense'
 )
 
+# '^/income_sources/$'
+# '^/income_sources/{pk}/$'
+router.register(
+    prefix=r'income_sources',
+    viewset=income.views.IncomeSourceViewSet,
+    base_name='incomesource'
+)
+
+# '^/incomes/$'
+# '^/incomes/{pk}/$'
+router.register(
+    prefix=r'incomes',
+    viewset=income.views.IncomeViewSet,
+    base_name='income'
+)
+
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^', include(banks_account_router.urls)),
