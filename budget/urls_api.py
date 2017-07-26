@@ -4,6 +4,9 @@ from rest_framework_nested import routers
 import bank.views
 import bank_account.views
 import exchange.views
+import expense.views
+import income.views
+
 
 # '^/banks/$'
 # '^/banks/{pk}/$'
@@ -49,6 +52,14 @@ router.register(
     prefix=r'conversions',
     viewset=exchange.views.ConversionViewSet,
     base_name='conversion'    # set view/URL names as 'conversion-list', etc
+)
+
+# '^/expense_category/$'
+# '^/expense_category/{pk}/$'
+router.register(
+    prefix=r'expense_categories',
+    viewset=expense.views.ExpenseCategoryViewSet,
+    base_name='expensecategory'
 )
 
 urlpatterns = [
