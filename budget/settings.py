@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'rest_auth.registration',
-    'rest_framework_swagger',
 
     'bank',
     'bank_account',
