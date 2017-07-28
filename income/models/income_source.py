@@ -18,7 +18,7 @@ class IncomeSource(models.Model):
                                       '"Gifts", etc).')
     order = models.PositiveSmallIntegerField(
         default=0, help_text='An order this income source will be displayed '
-                             'among other ones'
+                             'among the other ones'
     )
 
     class Meta:
