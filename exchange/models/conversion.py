@@ -14,17 +14,22 @@ class Conversion(models.Model):
                              related_name='conversions',
                              on_delete=models.CASCADE)
 
-    amount_from = models.DecimalField(max_digits=12, decimal_places=2)
+    amount_from = models.DecimalField(max_digits=12,
+                                      decimal_places=2,
+                                      help_text="Amount of money you sold")
     currency_from = models.ForeignKey('exchange.Currency',
                                       related_name='conversions_from',
                                       on_delete=models.CASCADE)
 
-    amount_to = models.DecimalField(max_digits=12, decimal_places=2)
+    amount_to = models.DecimalField(max_digits=12,
+                                    decimal_places=2,
+                                    help_text="Amount of money you purchased")
     currency_to = models.ForeignKey('exchange.Currency',
                                     related_name='conversions_to',
                                     on_delete=models.CASCADE)
 
-    date = models.DateTimeField(default=datetime.now)
+    date = models.DateTimeField(default=datetime.now,
+                                help_text="Date when conversion was performed")
     description = models.TextField(blank=True)
 
     class Meta:

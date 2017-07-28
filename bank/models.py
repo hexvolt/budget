@@ -14,7 +14,9 @@ class Bank(models.Model):
                              related_name='banks',
                              on_delete=models.CASCADE)
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255,
+                            help_text='A bank name where you have '
+                                      'certain accounts')
 
     class Meta:
         db_table = 'bank'

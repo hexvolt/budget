@@ -13,13 +13,17 @@ class BankAccount(models.Model):
                              related_name='accounts',
                              on_delete=models.PROTECT)
 
-    balance = models.DecimalField(max_digits=12, decimal_places=2)
+    balance = models.DecimalField(max_digits=12,
+                                  decimal_places=2,
+                                  help_text='Current balance')
 
     currency = models.ForeignKey('exchange.Currency',
                                  related_name='bank_accounts',
                                  on_delete=models.PROTECT)
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255,
+                            help_text='A distinguishable name of your account '
+                                      '(e.g. "Visa 0XXX", "Deposit")')
     description = models.TextField(blank=True)
 
     # account_type (deposit, card, saving, etc)

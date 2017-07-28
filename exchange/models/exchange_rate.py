@@ -18,7 +18,9 @@ class ExchangeRate(models.Model):
                              related_name='exchange_rates',
                              on_delete=models.CASCADE)
 
-    rate = models.DecimalField(max_digits=18, decimal_places=9)
+    rate = models.DecimalField(max_digits=18,
+                               decimal_places=9,
+                               help_text='(currency_from / currency_to) rate')
     date = models.DateTimeField(default=datetime.now)
 
     currency_from = models.ForeignKey('exchange.Currency',
