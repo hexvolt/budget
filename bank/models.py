@@ -3,6 +3,12 @@ from django.db import models
 
 
 class Bank(models.Model):
+    """
+    Represents a bank where user have certain accounts.
+
+    Each user have at least one Bank instance named 'Cash'
+    for storing cash accounts.
+    """
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              related_name='banks',

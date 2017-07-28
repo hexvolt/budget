@@ -5,6 +5,10 @@ from django.db import models
 
 
 class Conversion(models.Model):
+    """
+    Represents an operation of currency conversion performed by
+    user at a certain time.
+    """
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              related_name='conversions',

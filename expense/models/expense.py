@@ -4,6 +4,12 @@ from django.db import models
 
 
 class Expense(models.Model):
+    """
+    Represents any kind of expense user had at a certain time.
+
+    Supposed to be filled by user. Used by system to calculate
+    estimated balances and other statistics.
+    """
 
     expense_category = models.ForeignKey('expense.ExpenseCategory',
                                          related_name='expenses',

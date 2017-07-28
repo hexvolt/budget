@@ -3,6 +3,11 @@ from django.db import models
 
 
 class ExpenseCategory(models.Model):
+    """
+    A category of expenses (e.g. "Food", "Housing", etc).
+
+    Each user defines his own categories and their order.
+    """
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              related_name='expense_categories',

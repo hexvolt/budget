@@ -4,6 +4,15 @@ from django.db import models
 
 
 class ExchangeRate(models.Model):
+    """
+    Represents a currency exchange rate of a certain bank
+    registered at a certain time.
+
+    Supposed to be maintained by user or automatically.
+
+    Having a history of exchange rates allows calculating
+    all kinds of equivalents in selected currency.
+    """
 
     bank = models.ForeignKey('bank.Bank',
                              related_name='exchange_rates',

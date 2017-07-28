@@ -3,6 +3,11 @@ from django.db import models
 
 
 class IncomeSource(models.Model):
+    """
+    An income source (e.g. "Salary", "Gifts", etc).
+
+    Each user defines his own income sources.
+    """
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              related_name='income_sources',

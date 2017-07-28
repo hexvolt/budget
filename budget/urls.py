@@ -6,5 +6,6 @@ urlpatterns = [
     # url(r'^$', landing_page),
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('budget.urls_api')),
-    url(r'^api-auth/', include('rest_framework.urls'))
+    url(r'^api-auth/', include('rest_framework.urls')),
+
 ]

@@ -2,6 +2,12 @@ from django.db import models
 
 
 class BankAccount(models.Model):
+    """
+    Represents a current state of a certain user's account.
+
+    It is supposed to be periodically updated by user in order
+    to calculate deficits.
+    """
 
     bank = models.ForeignKey('bank.Bank',
                              related_name='accounts',
