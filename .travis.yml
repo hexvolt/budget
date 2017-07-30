@@ -13,3 +13,8 @@ before_script:
   - psql -c "CREATE DATABASE travis_ci_test;" -U postgres
 
 script: ./manage.py test
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
