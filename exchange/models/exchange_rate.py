@@ -1,6 +1,5 @@
-from datetime import datetime
-
 from django.db import models
+from django.utils import timezone
 
 
 class ExchangeRate(models.Model):
@@ -10,7 +9,7 @@ class ExchangeRate(models.Model):
                              on_delete=models.CASCADE)
 
     rate = models.DecimalField(max_digits=18, decimal_places=9)
-    date = models.DateTimeField(default=datetime.now)
+    date = models.DateTimeField(default=timezone.now)
 
     currency_from = models.ForeignKey('exchange.Currency',
                                       related_name='exchange_rates_from',

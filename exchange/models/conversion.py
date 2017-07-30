@@ -1,7 +1,6 @@
-from datetime import datetime
-
 from django.conf import settings
 from django.db import models
+from django.utils import timezone
 
 
 class Conversion(models.Model):
@@ -20,7 +19,7 @@ class Conversion(models.Model):
                                     related_name='conversions_to',
                                     on_delete=models.CASCADE)
 
-    date = models.DateTimeField(default=datetime.now)
+    date = models.DateTimeField(default=timezone.now)
     description = models.TextField(blank=True)
 
     class Meta:

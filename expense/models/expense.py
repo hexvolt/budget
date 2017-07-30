@@ -1,6 +1,5 @@
-from datetime import datetime
-
 from django.db import models
+from django.utils import timezone
 
 
 class Expense(models.Model):
@@ -14,7 +13,7 @@ class Expense(models.Model):
                                  related_name='expenses',
                                  on_delete=models.PROTECT)
 
-    date = models.DateTimeField(default=datetime.now)
+    date = models.DateTimeField(default=timezone.now)
     description = models.TextField(blank=True)
 
     # from_account = models.ForeignKey('account.Account', null=True)
