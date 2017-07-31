@@ -21,7 +21,7 @@ before_script:
   - psql -c "CREATE DATABASE travis_ci_test;" -U postgres
 
 script:
-  - flake8 .
+  - flake8 . --count
   - ./manage.py migrate
   - ./manage.py test
 
