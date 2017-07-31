@@ -1,8 +1,8 @@
 
-branches:
-  only:
-  - master
-  - development
+#branches:
+#  only:
+#  - master
+#  - development
 
 language: python
 
@@ -14,12 +14,14 @@ services:
 
 install:
   - pip install -r requirements.txt
+  - pip install flake8 --use-mirrors
   - pip install psycopg2 --quiet
 
 before_script:
   - psql -c "CREATE DATABASE travis_ci_test;" -U postgres
 
 script:
+  - flake8 .
   - ./manage.py migrate
   - ./manage.py test
 
