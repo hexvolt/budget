@@ -1,6 +1,5 @@
-from datetime import datetime
-
 from django.db import models
+from django.utils import timezone
 
 
 class Income(models.Model):
@@ -20,7 +19,7 @@ class Income(models.Model):
                                  related_name='incomes',
                                  on_delete=models.PROTECT)
 
-    date = models.DateTimeField(default=datetime.now)
+    date = models.DateTimeField(default=timezone.now)
     description = models.TextField(blank=True)
 
     # hash_tags = models.ManyToManyField()
