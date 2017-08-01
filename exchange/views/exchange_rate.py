@@ -4,6 +4,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import rest_framework as filters
 
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 
 from exchange.models import ExchangeRate
 from exchange.serializers import ExchangeRateSerializer
@@ -54,6 +55,7 @@ class ExchangeRateViewSet(viewsets.ModelViewSet):
     serializer_class = ExchangeRateSerializer
     filter_backends = (DjangoFilterBackend,)
     filter_class = ExchangeRateFilter
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         return ExchangeRate.objects.filter(bank__user=self.request.user)

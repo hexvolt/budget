@@ -3,6 +3,12 @@ from django.utils import timezone
 
 
 class Income(models.Model):
+    """
+    Represents any kind of income user had at a certain time.
+
+    Supposed to be filled by user. Used by system to calculate
+    estimated balances and other statistics.
+    """
 
     income_source = models.ForeignKey('income.IncomeSource',
                                       related_name='incomes',

@@ -1,6 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter
+from rest_framework.permissions import IsAuthenticated
 
 from expense.models import Expense
 from expense.serializers import ExpenseSerializer
@@ -16,6 +17,7 @@ class ExpenseViewSet(viewsets.ModelViewSet):
         'currency': ['exact'],
     }
     search_fields = ('description',)
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         return Expense.objects.filter(expense_category__user=self.request.user)
