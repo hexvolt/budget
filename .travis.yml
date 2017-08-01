@@ -34,6 +34,6 @@ deploy:
     secure: VUUuU0IRooB62C/ZRW6pF8t+uTr439G3mN+/WZyve5rjEwyFX7vV6NOQbg+0rEbg32aqftQmBUaGsysz5NCs498wUH72MyIxhzqJXCgUHHNWeXv1b0BGQryyXqQDibHynmWtiXBj0hfuBQgH+982/rr2gnTi0puvjkjbsvWKIu60BvZ1kyxP6hRRvb8KDloaBIWRqx4vcWDVQBi1ROrUv+2XE+P3Wz8xFqaaNdhSMSn6DWsWMRWn8r1FZroVnFiePB3XWCDClN/bnc1er+xAHKTQ4XOq0IcZFrod8rJGh3zVuoQnKdyrtPzUx8BB4Mmwyb9HVjktUJKAEVPX3lcSFV9/STgIoudVYEvdlvX9hfw+5p5bhGpsDhzjLsF+sQu+0MnjukBuYrWel0kFpRf/jWeWsrN1ZgJ9m+oLr1BUh1fu2/Rcq8ao/x4ZjLZ8N7bcnFEvtIAo/slbTp0/zOTJCztSnKru7xfH3H/bIdbVaxZDkGOFaTM0uCxlG2EXrGH+NMBoLP5l+eEy+U0cK9dKgBmMflOteHeZMN6HUyG2aO5k0V377JiR2V1Zlvr+mEUyTrnxAjePnIy+yEapgeCgAEERajB2WZtQfuhviR2UAzrdbK6gA+Vzvxz4vhFsKXN0QmXaRv3Q9zrR5o5kbONfgjN1zFZullaUBky8rxIM4/w=
   app:
 #    master: ...
-    development: budget-staging
+    development: hexvolt-budget-staging
     run:
       - "./manage.py migrate"
