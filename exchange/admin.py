@@ -35,4 +35,3 @@ class ExchangeRateAdmin(admin.ModelAdmin):
 admin.site.register(Conversion, ConversionAdmin)
 admin.site.register(Currency, CurrencyAdmin)
 admin.site.register(ExchangeRate, ExchangeRateAdmin)
-

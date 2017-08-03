@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter, DjangoFilterBackend
 from rest_framework.generics import get_object_or_404
+from rest_framework.permissions import IsAuthenticated
 
 from bank_account.models import BankAccount
 from bank_account.serializers import BankAccountSerializer
@@ -12,6 +13,7 @@ class BankAccountViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, SearchFilter,)
     filter_fields = ('currency',)
     search_fields = ('name',)
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         """

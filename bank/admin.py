@@ -10,4 +10,3 @@ class BankAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Bank, BankAdmin)
-

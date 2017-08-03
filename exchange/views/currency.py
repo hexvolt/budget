@@ -11,3 +11,4 @@ class CurrencyViewSet(viewsets.ModelViewSet):
     serializer_class = CurrencySerializer
     filter_backends = (SearchFilter,)
     search_fields = ('name', 'iso_code')
+    http_method_names = ('get', 'head')

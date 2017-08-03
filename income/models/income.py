@@ -1,9 +1,14 @@
-from datetime import datetime
-
 from django.db import models
+from django.utils import timezone
 
 
 class Income(models.Model):
+    """
+    Represents any kind of income user had at a certain time.
+
+    Supposed to be filled by user. Used by system to calculate
+    estimated balances and other statistics.
+    """
 
     income_source = models.ForeignKey('income.IncomeSource',
                                       related_name='incomes',
@@ -14,7 +19,7 @@ class Income(models.Model):
                                  related_name='incomes',
                                  on_delete=models.PROTECT)
 
-    date = models.DateTimeField(default=datetime.now)
+    date = models.DateTimeField(default=timezone.now)
     description = models.TextField(blank=True)
 
     # hash_tags = models.ManyToManyField()
