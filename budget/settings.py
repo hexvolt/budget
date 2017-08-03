@@ -81,12 +81,21 @@ WSGI_APPLICATION = 'budget.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'travis_ci_test',
+        'USER': 'postgres',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
 # Set 'default' database config as the one specified by the URL retrieved
 # from environment variable $DATABASE_URL. Also needed by Heroku.
-DATABASES = {
-    'default': dj_database_url.config(conn_max_age=500)
-}
+db_from_env = dj_database_url.config(conn_max_age=500)
+
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
