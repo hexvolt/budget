@@ -105,3 +105,10 @@ ENV/
 
 # DB
 *.sqlite3
+
+# Node
+frontend/build/*
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
