@@ -5,7 +5,7 @@ const BundleTracker = require('webpack-bundle-tracker');
 const config = {
   context: __dirname,
 
-  entry: './src/js/index.js', // entry point of app
+  entry: './src/js/index', // entry point of app
 
   output: {
       path: path.resolve('./bundles/'),
@@ -23,6 +23,7 @@ const config = {
     new BundleTracker({filename: './webpack-stats.json'})
   ],
 
+  // where and which files look for
   resolve: {
     modules: ['node_modules', 'bower_components'],
     extensions: ['*', '.js', '.jsx']
