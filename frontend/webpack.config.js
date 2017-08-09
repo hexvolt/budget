@@ -9,7 +9,7 @@ const config = {
 
   output: {
       path: path.resolve('./bundles/'),
-      filename: "[name]-[hash].js"
+      filename: "bundle.js"
   },
 
   module: {
