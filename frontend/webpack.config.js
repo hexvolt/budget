@@ -15,7 +15,14 @@ const config = {
   module: {
     loaders: [
       // transform JSX into JS:
-      { test: /\.jsx?$/, exclude: /node_modules/, use: 'babel-loader'}
+      {
+        test: /\.jsx?$/,          // Match both .js and .jsx files
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          presets: ['react', 'es2015']
+        }
+      }
     ]
   },
 
