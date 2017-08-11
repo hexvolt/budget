@@ -5,7 +5,7 @@ const BundleTracker = require('webpack-bundle-tracker');
 const config = {
   context: __dirname,
 
-  entry: './src/js/index', // entry point of app
+  entry: './src', // entry point of app
 
   output: {
       path: path.resolve('./bundles/'),
@@ -13,15 +13,18 @@ const config = {
   },
 
   module: {
-    loaders: [
-      // transform JSX into JS:
+    rules: [
       {
         test: /\.jsx?$/,          // Match both .js and .jsx files
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          presets: ['react', 'es2015']
-        }
+        use: [{
+            loader: 'babel-loader',
+            options: { presets: ['react', 'es2015'] }
+        }],
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
     ]
   },

@@ -63,7 +63,7 @@ ROOT_URLCONF = 'budget.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['./frontend/src/html/'],
+        'DIRS': ['./frontend/src/'],
         'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
