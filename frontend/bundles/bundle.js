@@ -9766,12 +9766,7 @@ var Square = function (_React$Component) {
   function Square() {
     _classCallCheck(this, Square);
 
-    var _this = _possibleConstructorReturn(this, (Square.__proto__ || Object.getPrototypeOf(Square)).call(this));
-
-    _this.state = {
-      value: null
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (Square.__proto__ || Object.getPrototypeOf(Square)).apply(this, arguments));
   }
 
   _createClass(Square, [{
@@ -9782,9 +9777,9 @@ var Square = function (_React$Component) {
       return _react2.default.createElement(
         'button',
         { className: 'square', onClick: function onClick() {
-            return _this2.setState({ value: 'X' });
+            return _this2.props.onClick();
           } },
-        this.state.value
+        this.props.value
       );
     }
   }]);
@@ -9798,13 +9793,32 @@ var Board = function (_React$Component2) {
   function Board() {
     _classCallCheck(this, Board);
 
-    return _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).apply(this, arguments));
+    var _this3 = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this));
+
+    _this3.state = {
+      squares: Array(9).fill(null)
+    };
+    return _this3;
   }
 
   _createClass(Board, [{
+    key: 'handleClick',
+    value: function handleClick(i) {
+      var squares = this.state.squares.slice();
+      squares[i] = 'X';
+      this.setState({ squares: squares });
+    }
+  }, {
     key: 'renderSquare',
     value: function renderSquare(i) {
-      return _react2.default.createElement(Square, { value: i });
+      var _this4 = this;
+
+      return _react2.default.createElement(Square, {
+        value: this.state.squares[i],
+        onClick: function onClick() {
+          return _this4.handleClick(i);
+        }
+      });
     }
   }, {
     key: 'render',
