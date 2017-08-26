@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import {
   BrowserRouter,
@@ -173,15 +173,15 @@ class App extends React.Component {
   }
 }
 
-const rootReducer = (state={}, action) => {
-  return {
-    ...state
-  }
-};
+
+const rootReducer = combineReducers({
+  //<state-key>: <reducer-to-manage-it>
+  //...
+});
 
 ReactDOM.render((
   <Provider store={createStore(rootReducer)}>
-    /* makes store available in the context for all children */
+    {/* makes `store` available in the context for all children */}
     <BrowserRouter>
       <App />
     </BrowserRouter>

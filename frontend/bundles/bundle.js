@@ -70,8 +70,6 @@
 "use strict";
 
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(8);
@@ -330,17 +328,14 @@ var App = function (_React$Component) {
   return App;
 }(_react2.default.Component);
 
-var rootReducer = function rootReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments[1];
-
-  return _extends({}, state);
-};
+var rootReducer = (0, _redux.combineReducers)({
+  //<state-key>: <reducer-to-manage-it>
+  //...
+});
 
 _reactDom2.default.render(_react2.default.createElement(
   _reactRedux.Provider,
   { store: (0, _redux.createStore)(rootReducer) },
-  '/* makes store available in the context for all children */',
   _react2.default.createElement(
     _reactRouterDom.BrowserRouter,
     null,
