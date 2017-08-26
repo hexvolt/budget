@@ -20,7 +20,7 @@ const config = {
         exclude: /node_modules/,
         use: [{
             loader: 'babel-loader',
-            options: { presets: ['react', 'es2015'] }
+            options: { presets: ['react', 'es2015', 'stage-2'] }
         }],
       },
       {
