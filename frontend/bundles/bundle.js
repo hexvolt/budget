@@ -11439,6 +11439,7 @@ var Main = function Main() {
   return _react2.default.createElement(
     'main',
     null,
+    'Main section',
     _react2.default.createElement(
       _reactRouterDom.Switch,
       null,

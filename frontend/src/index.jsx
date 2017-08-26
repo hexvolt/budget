@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import {
   BrowserRouter,
   Link,
@@ -150,6 +152,7 @@ const Contacts = () => (
 
 const Main = () => (
   <main>
+    Main section
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/login" component={Login} />
@@ -170,8 +173,17 @@ class App extends React.Component {
   }
 }
 
+const rootReducer = (state={}, action) => {
+  return {
+    ...state
+  }
+};
+
 ReactDOM.render((
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <Provider store={createStore(rootReducer)}>
+    /* makes store available in the context for all children */
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
 ), document.getElementById('root'));
