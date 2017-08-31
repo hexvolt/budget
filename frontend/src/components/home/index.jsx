@@ -1,9 +1,9 @@
 import React from 'react';
 
 
-const About = () => (
+const Home = () => (
   <div>
-    <h1>About</h1>
+    <h1>Budget</h1>
     <ul>
       <li>email</li>
       <li>phone</li>
@@ -11,4 +11,4 @@ const About = () => (
   </div>
 );
 
-export default About;
+export default Home;
