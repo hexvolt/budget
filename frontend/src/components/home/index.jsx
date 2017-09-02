@@ -5,8 +5,8 @@ const Home = () => (
   <div>
     <h1>Budget</h1>
     <ul>
-      <li>email</li>
-      <li>phone</li>
+      <li>Home page</li>
+      <li>Some info</li>
     </ul>
   </div>
 );

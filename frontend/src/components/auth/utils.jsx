@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from "react-router-dom";
+import Routes from "../routes";
 
 
 class EnsureLoggedIn extends React.Component {
@@ -19,7 +20,7 @@ class EnsureLoggedIn extends React.Component {
 
     else
       return <Redirect to={{
-        pathname: "/",
+        pathname: Routes.LOGIN,
         state: { from: this.props.location}
       }} />
   }

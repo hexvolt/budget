@@ -1,3 +1,5 @@
-export const HOME = "/";
-export const LOGIN = "/login";
-export const DASHBOARD = "/dash";
+export default {
+  HOME: "/",
+  LOGIN: "/login",
+  DASHBOARD: "/dash",
+}
