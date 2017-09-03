@@ -24,13 +24,19 @@ class LoginForm extends React.Component {
     })
   }
 
-  handleSubmit(event) {
-
+  handleSubmit(e) {
+    e.preventDefault();
+    // need to submit the data to server
+    // dispatch an action -> a certain reducer will be triggered, which will
+    // update a global store state.
+    // But here we don't have a store.dispatch method to invoke.. -
+    // that is why a onSubmit method of outer container should be called here,
+    // because outer container has an access to sotre.dispatch method.
   }
 
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <label>
           User Name:
           <input name="username" type="text" value={this.state.username} onChange={this.handleChange} /><br/>

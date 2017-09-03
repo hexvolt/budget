@@ -28219,13 +28219,21 @@ var LoginForm = function (_React$Component) {
     }
   }, {
     key: 'handleSubmit',
-    value: function handleSubmit(event) {}
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      // need to submit the data to server
+      // dispatch an action -> a certain reducer will be triggered, which will
+      // update a global store state.
+      // But here we don't have a store.dispatch method to invoke.. -
+      // that is why a onSubmit method of outer container should be called here,
+      // because outer container has an access to sotre.dispatch method.
+    }
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'form',
-        null,
+        { onSubmit: this.handleSubmit },
         _react2.default.createElement(
           'label',
           null,
