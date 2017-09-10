@@ -28222,10 +28222,12 @@ var LoginForm = function (_React$Component) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
+      var _this2 = this;
+
       e.preventDefault();
 
-      // validate form data
       this.setState(_defineProperty({}, 'errors', []));
+      // TODO: validate the data
 
       // send request to the server
       fetch('/api/auth/login/', {
@@ -28243,17 +28245,10 @@ var LoginForm = function (_React$Component) {
       }).then(function (response) {
         return response.json();
       }).then(function (data) {
-        return console.log(data);
+        return _this2.props.onLoggedIn(data);
       }).catch(function (error) {
         return console.log(error.data);
       });
-
-      // need to submit the data to server
-      // dispatch an action -> a certain reducer will be triggered, which will
-      // update a global store state.
-      // But here we don't have a store.dispatch method to invoke.. -
-      // that is why a onSubmit method of outer container should be called here,
-      // because outer container has an access to store.dispatch method.
     }
   }, {
     key: 'render',
@@ -28293,12 +28288,9 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    onSubmit: function onSubmit(event) {
-      console.log(event);
-      event.preventDefault();
-      console.log('fetching data');
-      console.log('dispatching the log in action if response is OK');
-      // dispatch()
+    onLoggedIn: function onLoggedIn(data) {
+      console.log(data);
+      // TODO: dispatch LOGGED_IN event with the authentication token
     }
   };
 };

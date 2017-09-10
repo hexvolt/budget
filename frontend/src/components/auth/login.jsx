@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { checkApiResponseStatus } from "../../common/utils";
 
 
 class LoginForm extends React.Component {
@@ -9,7 +10,8 @@ class LoginForm extends React.Component {
 
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      errors: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -17,21 +19,36 @@ class LoginForm extends React.Component {
   }
 
   handleChange(event) {
-    const name = event.target.name;
-    const value = event.target.value;
+    // merge target value into existing state
     this.setState({
-      [name]: value   // merges this param into existing state
+      [event.target.name]: event.target.value
     })
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    // need to submit the data to server
-    // dispatch an action -> a certain reducer will be triggered, which will
-    // update a global store state.
-    // But here we don't have a store.dispatch method to invoke.. -
-    // that is why a onSubmit method of outer container should be called here,
-    // because outer container has an access to sotre.dispatch method.
+
+    this.setState({
+      ['errors']: []
+    });
+    // TODO: validate the data
+
+    // send request to the server
+    fetch('/api/auth/login/', {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password,
+      })
+    })
+    .then(response => checkApiResponseStatus(response))
+    .then(response => response.json())
+    .then(data => this.props.onLoggedIn(data))
+    .catch(error => console.log(error.data));
   }
 
   render() {
@@ -59,8 +76,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onClick: (something) => {
-      dispatch()
+    onLoggedIn: (data) => {
+      console.log(data);
+      // TODO: dispatch LOGGED_IN event with the authentication token
     }
   }
 };
@@ -70,4 +88,4 @@ const LoginContainer = connect(
   mapDispatchToProps
 )(LoginForm);
 
-export default LoginForm;
+export default LoginContainer;
