@@ -28205,7 +28205,7 @@ var LoginForm = function (_React$Component) {
     _this.state = {
       username: '',
       password: '',
-      errors: []
+      errors: {}
     };
 
     _this.handleChange = _this.handleChange.bind(_this);
@@ -28226,7 +28226,7 @@ var LoginForm = function (_React$Component) {
 
       e.preventDefault();
 
-      this.setState(_defineProperty({}, 'errors', []));
+      this.setState(_defineProperty({}, 'errors', {}));
       // TODO: validate the data
 
       // send request to the server
@@ -28246,8 +28246,8 @@ var LoginForm = function (_React$Component) {
         return response.json();
       }).then(function (data) {
         return _this2.props.onLoggedIn(data);
-      }).catch(function (error) {
-        return console.log(error.data);
+      }).catch(function (errors) {
+        return _this2.setState(_defineProperty({}, 'errors', errors.data));
       });
     }
   }, {
@@ -28274,6 +28274,17 @@ var LoginForm = function (_React$Component) {
           'button',
           { type: 'submit' },
           'Login'
+        ),
+        this.state.errors.non_field_errors && _react2.default.createElement(
+          'ul',
+          { className: 'errors' },
+          this.state.errors.non_field_errors.map(function (error, i) {
+            return _react2.default.createElement(
+              'li',
+              { key: i },
+              error
+            );
+          })
         )
       );
     }

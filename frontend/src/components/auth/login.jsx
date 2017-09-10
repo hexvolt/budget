@@ -11,7 +11,7 @@ class LoginForm extends React.Component {
     this.state = {
       username: '',
       password: '',
-      errors: []
+      errors: {}
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -29,7 +29,7 @@ class LoginForm extends React.Component {
     e.preventDefault();
 
     this.setState({
-      ['errors']: []
+      ['errors']: {}
     });
     // TODO: validate the data
 
@@ -48,7 +48,7 @@ class LoginForm extends React.Component {
     .then(response => checkApiResponseStatus(response))
     .then(response => response.json())
     .then(data => this.props.onLoggedIn(data))
-    .catch(error => console.log(error.data));
+    .catch(errors => this.setState({['errors']: errors.data}));
   }
 
   render() {
@@ -63,6 +63,13 @@ class LoginForm extends React.Component {
           <input name="password" type="text" value={this.state.password} onChange={this.handleChange} /><br/>
         </label>
         <button type="submit">Login</button>
+        {
+          this.state.errors.non_field_errors && (
+            <ul className="errors">
+            {this.state.errors.non_field_errors.map((error, i) => <li key={i}>{error}</li>)}
+            </ul>
+          )
+        }
       </form>
     );
   }
