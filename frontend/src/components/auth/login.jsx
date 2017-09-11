@@ -48,7 +48,7 @@ class LoginForm extends React.Component {
     })
     .then(response => checkApiResponseStatus(response))
     .then(response => response.json())
-    .then(data => this.props.onLoggedIn(data))
+    .then(data => data.key && this.props.onLoggedIn(data.key))
     .catch(errors => this.setState({['errors']: errors.data}));
   }
 
@@ -57,11 +57,13 @@ class LoginForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           User Name:
-          <input name="username" type="text" value={this.state.username} onChange={this.handleChange} /><br/>
+          <input name="username" type="text" value={this.state.username}
+                 onChange={this.handleChange} /><br/>
         </label>
         <label>
           Password:
-          <input name="password" type="text" value={this.state.password} onChange={this.handleChange} /><br/>
+          <input name="password" type="text" value={this.state.password}
+                 onChange={this.handleChange} /><br/>
         </label>
         <button type="submit">Login</button>
         <ErrorList errors={this.state.errors.non_field_errors} />
@@ -71,6 +73,7 @@ class LoginForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
 
   }
@@ -78,8 +81,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLoggedIn: (data) => {
-      console.log(data);
+    onLoggedIn: (key) => {
+      console.log("Successfully logged in!");
+      dispatch({'type': 'LOGGED_IN', 'token': key});
       // TODO: dispatch LOGGED_IN event with the authentication token
     }
   }
