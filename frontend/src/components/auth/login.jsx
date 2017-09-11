@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { checkApiResponseStatus } from "../../common/utils";
+import { ErrorList} from "../common/utils";
 
 
 class LoginForm extends React.Component {
@@ -63,13 +64,7 @@ class LoginForm extends React.Component {
           <input name="password" type="text" value={this.state.password} onChange={this.handleChange} /><br/>
         </label>
         <button type="submit">Login</button>
-        {
-          this.state.errors.non_field_errors && (
-            <ul className="errors">
-            {this.state.errors.non_field_errors.map((error, i) => <li key={i}>{error}</li>)}
-            </ul>
-          )
-        }
+        <ErrorList errors={this.state.errors.non_field_errors} />
       </form>
     );
   }

@@ -12260,7 +12260,7 @@ var _app = __webpack_require__(263);
 
 var _app2 = _interopRequireDefault(_app);
 
-var _reducers = __webpack_require__(272);
+var _reducers = __webpack_require__(273);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -27957,7 +27957,7 @@ var _body = __webpack_require__(265);
 
 var _body2 = _interopRequireDefault(_body);
 
-var _footer = __webpack_require__(271);
+var _footer = __webpack_require__(272);
 
 var _footer2 = _interopRequireDefault(_footer);
 
@@ -28058,7 +28058,7 @@ var _login = __webpack_require__(268);
 
 var _login2 = _interopRequireDefault(_login);
 
-var _utils = __webpack_require__(270);
+var _utils = __webpack_require__(271);
 
 var _routes = __webpack_require__(65);
 
@@ -28184,6 +28184,8 @@ var _reactRedux = __webpack_require__(63);
 
 var _utils = __webpack_require__(269);
 
+var _utils2 = __webpack_require__(270);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -28275,17 +28277,7 @@ var LoginForm = function (_React$Component) {
           { type: 'submit' },
           'Login'
         ),
-        this.state.errors.non_field_errors && _react2.default.createElement(
-          'ul',
-          { className: 'errors' },
-          this.state.errors.non_field_errors.map(function (error, i) {
-            return _react2.default.createElement(
-              'li',
-              { key: i },
-              error
-            );
-          })
-        )
+        _react2.default.createElement(_utils2.ErrorList, { errors: this.state.errors.non_field_errors })
       );
     }
   }]);
@@ -28333,6 +28325,41 @@ exports.checkApiResponseStatus = checkApiResponseStatus;
 
 /***/ }),
 /* 270 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ErrorList = undefined;
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ErrorList = function ErrorList(_ref) {
+  var errors = _ref.errors;
+  return _react2.default.createElement(
+    "ul",
+    { className: "errors" },
+    errors && errors.map(function (error, i) {
+      return _react2.default.createElement(
+        "li",
+        { key: i },
+        error
+      );
+    })
+  );
+};
+
+exports.ErrorList = ErrorList;
+
+/***/ }),
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28411,7 +28438,7 @@ var EnsureLoggedInContainer = (0, _reactRedux.connect)(mapStateToProps)(EnsureLo
 exports.EnsureLoggedInContainer = EnsureLoggedInContainer;
 
 /***/ }),
-/* 271 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28438,7 +28465,7 @@ var Footer = function Footer() {
 exports.default = Footer;
 
 /***/ }),
-/* 272 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
