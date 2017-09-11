@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { checkApiResponseStatus } from "../../common/utils";
 import { ErrorList} from "../common/utils";
+import { setLoggedIn} from "../../actions/auth";
 
 
 class LoginForm extends React.Component {
@@ -81,10 +82,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLoggedIn: (key) => {
+    onLoggedIn: (token) => {
       console.log("Successfully logged in!");
-      dispatch({'type': 'LOGGED_IN', 'token': key});
-      // TODO: dispatch LOGGED_IN event with the authentication token
+      dispatch(setLoggedIn(token));
     }
   }
 };

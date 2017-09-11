@@ -28186,6 +28186,8 @@ var _utils = __webpack_require__(269);
 
 var _utils2 = __webpack_require__(270);
 
+var _auth = __webpack_require__(275);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -28294,10 +28296,9 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    onLoggedIn: function onLoggedIn(key) {
+    onLoggedIn: function onLoggedIn(token) {
       console.log("Successfully logged in!");
-      dispatch({ 'type': 'LOGGED_IN', 'token': key });
-      // TODO: dispatch LOGGED_IN event with the authentication token
+      dispatch((0, _auth.setLoggedIn)(token));
     }
   };
 };
@@ -28525,6 +28526,22 @@ exports.default = (0, _redux.combineReducers)({
   loggedIn: loggedIn,
   token: token
 });
+
+/***/ }),
+/* 275 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var setLoggedIn = function setLoggedIn(token) {
+  return { 'type': 'LOGGED_IN', 'token': token };
+};
+
+exports.setLoggedIn = setLoggedIn;
 
 /***/ })
 /******/ ]);
