@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from "react-router-dom";
-import Routes from "../routes";
+import Routes from "routes";
 
 
 class EnsureLoggedIn extends React.Component {

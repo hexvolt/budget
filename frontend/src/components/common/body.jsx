@@ -3,11 +3,11 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-import Home from '../home';
-import Dashboard from '../dashboard';
-import Login from '../auth/login';
-import { EnsureLoggedInContainer } from '../auth/utils';
-import Routes from "../routes";
+import Home from 'components/home';
+import Dashboard from 'components/dashboard';
+import Login from 'components/auth/login';
+import { EnsureLoggedInContainer } from 'components/auth/utils';
+import Routes from "routes";
 
 
 const Body = () => {

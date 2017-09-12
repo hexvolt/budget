@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from './common/header';
-import Body from './common/body';
-import Footer from './common/footer';
+import Header from 'components/common/header';
+import Body from 'components/common/body';
+import Footer from 'components/common/footer';
 
 
 const App = () => {

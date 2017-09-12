@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { checkApiResponseStatus } from "../../common/utils";
-import { ErrorList } from "../common/utils";
-import { setLoggedIn } from "../../actions/auth";
+import { checkApiResponseStatus } from "common/utils";
+import { ErrorList } from "components/common/utils";
+import { setLoggedIn } from "actions/auth";
 
 
 class LoginForm extends React.Component {
