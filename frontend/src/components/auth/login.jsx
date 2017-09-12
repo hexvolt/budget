@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { checkApiResponseStatus } from "../../common/utils";
-import { ErrorList} from "../common/utils";
-import { setLoggedIn} from "../../actions/auth";
+import { ErrorList } from "../common/utils";
+import { setLoggedIn } from "../../actions/auth";
 
 
 class LoginForm extends React.Component {
@@ -73,13 +73,6 @@ class LoginForm extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return {
-
-  }
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     onLoggedIn: (token) => {
@@ -90,7 +83,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const LoginContainer = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(LoginForm);
 

@@ -1,6 +1,5 @@
 const path = require('path');
-const webpack = require('webpack');
-const BundleTracker = require('webpack-bundle-tracker');
+// const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
@@ -34,13 +33,12 @@ const config = {
   },
 
   plugins: [
-    new BundleTracker({filename: './webpack-stats.json'}),
     new ExtractTextPlugin("styles.css"),
   ],
 
   // where and which files look for
   resolve: {
-    modules: ['node_modules', 'bower_components'],
+    modules: ['src', 'node_modules', 'bower_components'],
     extensions: ['*', '.js', '.jsx']
   }
 };
