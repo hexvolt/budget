@@ -28208,6 +28208,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(251);
 
+var _reactRouterDom = __webpack_require__(208);
+
 var _utils = __webpack_require__(270);
 
 var _utils2 = __webpack_require__(271);
@@ -28283,6 +28285,9 @@ var LoginForm = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var loggedIn = this.props.loggedIn;
+
+
       return _react2.default.createElement(
         'form',
         { onSubmit: this.handleSubmit },
@@ -28307,13 +28312,20 @@ var LoginForm = function (_React$Component) {
           { type: 'submit' },
           'Login'
         ),
-        _react2.default.createElement(_utils2.ErrorList, { errors: this.state.errors.non_field_errors })
+        _react2.default.createElement(_utils2.ErrorList, { errors: this.state.errors.non_field_errors }),
+        loggedIn && _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' })
       );
     }
   }]);
 
   return LoginForm;
 }(_react2.default.Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    loggedIn: state.auth.loggedIn
+  };
+};
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
@@ -28324,7 +28336,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-var LoginContainer = (0, _reactRedux.connect)(null, mapDispatchToProps)(LoginForm);
+var LoginContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LoginForm);
 
 exports.default = LoginContainer;
 

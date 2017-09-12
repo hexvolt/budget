@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { Redirect } from "react-router-dom";
 import { checkApiResponseStatus } from "common/utils";
 import { ErrorList } from "components/common/utils";
 import { setLoggedIn } from "actions/auth";
@@ -54,6 +55,8 @@ class LoginForm extends React.Component {
   }
 
   render() {
+    const { loggedIn } = this.props;
+
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
@@ -68,10 +71,18 @@ class LoginForm extends React.Component {
         </label>
         <button type="submit">Login</button>
         <ErrorList errors={this.state.errors.non_field_errors} />
+
+        { loggedIn && (<Redirect to="/" />)}
       </form>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.auth.loggedIn,
+  }
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -83,7 +94,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const LoginContainer = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(LoginForm);
 
