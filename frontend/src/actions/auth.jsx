@@ -1,6 +1,6 @@
-const setLoggedIn = (token) => {
-  return {'type': 'LOGGED_IN', 'token': token}
-};
+const setLoggedIn = (token) => ({
+  'type': 'LOGGED_IN', 'token': token
+});
 
 export {
   setLoggedIn,

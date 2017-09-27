@@ -78,20 +78,16 @@ class LoginForm extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    loggedIn: state.auth.loggedIn,
-  }
-};
+const mapStateToProps = (state) => ({
+  loggedIn: state.auth.loggedIn,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onLoggedIn: (token) => {
-      console.log("Successfully logged in!");
-      dispatch(setLoggedIn(token));
-    }
+const mapDispatchToProps = (dispatch) => ({
+  onLoggedIn(token) {
+    console.log("Successfully logged in!");
+    dispatch(setLoggedIn(token));
   }
-};
+});
 
 const LoginContainer = connect(
   mapStateToProps,
